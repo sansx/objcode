@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="has-topbar has-bottombar">
+<head>
+    <title>非 APP</title>
+ 
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+ 
+    <link rel="preload" href="images/start/btn_start.png" as="image">
+    <link rel="preload" href="images/start/game_background.jpg" as="image">
+    <link rel="preload" href="images/start/get_cj.png" as="image">
+    <link rel="preload" href="images/start/look_info.png" as="image">
+    <link rel="preload" href="images/start/look_jl.png" as="image">
+    <link rel="preload" href="images/start/no.png" as="image">
+    <link rel="preload" href="images/start/play.png" as="image">
+    <link rel="preload" href="images/start/restart.png" as="image">
+    <link rel="preload" href="images/start/rule.png" as="image">
+    <link rel="preload" href="images/start/rule2.png" as="image">
+    
+    
+    <script>
+        new function () {
+            var _self = this;
+            _self.width = 750;
+            _self.fontSize = 100;
+            _self.widthProportion = function () {
+                var p = (document.body && document.body.clientWidth || document.getElementsByTagName("html")[0].offsetWidth) / _self.width;
+                return p > 1 ? 1 : p < 0.2 ? 0.2 : p;
+            };
+            _self.changePage = function () {
+                var a = _self.widthProportion() * _self.fontSize;
+                document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a + "px !important");
+                if (a != parseFloat(window.getComputedStyle(document.documentElement)["fontSize"])) {
+                    document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + a / (parseFloat(window.getComputedStyle(document.documentElement)["fontSize"]) / a) + "px !important");
+                }
+            };
+            _self.changePage();
+            window.addEventListener('resize', function () {
+                _self.changePage();
+            }, false);
+        };
+    </script>
+    
+
+ 
+</head>
+
+<body class="fixation">
+    <section class="container_start">
+        <canvas></canvas>
+        <div class="control">
+            <div class="left block">
+                <div class="item-loader-container">
+                    <div class="la-ball-scale-ripple-multiple la-2x">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="right block">
+                <div class="item-loader-container">
+                    <div class="la-ball-scale-ripple-multiple la-2x">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+        <div class="time_score_mod">
+            <div class="tsmod">
+                <div class="case casel">
+                    <span>时间</span>
+                    <span class="clock">00:30</span>
+                </div>
+                <div class="line"></div>
+                <div class="case caser">
+                    <span>得分</span>
+                    <span class="score">0</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 倒计时顺序  GO  3   2   1   -->
+        <div class="count_dow_mod" style="display: none;">
+            <div class="time">
+                <p>GO</p>
+            </div>
+        </div>
+
+        
+
+    </section>
+
+
+    <!-- 点击规则弹出的游戏规则 -->
+    <div class="popup start_rule_tc">
+        <i class="icon_close close_btn rule_close"></i>
+        <div class="popup_con"></div>
+    </div>
+
+    <!-- 带开始按钮的规则 开始游戏 -->
+    <div class="start_game_mod">
+        <div class="line">
+            <span class="btn_start_game"><img src="images/btn_start_game.png" alt="开始游戏"></span>
+        </div>
+        <div class="line">
+            <span class="chance_txt">剩余游戏次数：<span class="chance"></span></span>
+        </div>
+        <div class="line">
+            <a class="btn btn_rule"><img src="images/sg1.png" alt="游戏规则"></a>
+            <a href="index.html" class="btn"><img src="images/sg2.png" alt="排行榜"></a>
+            <a href="javascript:;" class="btn btn_luck_link"><img src="images/sg3.png" alt="幸运大转盘"><i class="hint">2</i></a>
+            <a class="btn btn_share callNewfriend"><img src="images/sg4.png" alt="邀请好友玩"></a>
+        </div>
+    </div>
+ 
+ 
+
+
+    <!-- 新的开始游戏首屏 -->
+    <div class="popup examination_tc">
+        <!-- 程序!!! 我的最高分时,隐藏平时分数 显示这个div -->
+        <!-- <div class="my_high_score">
+            <span><img class="top_score_title" src="images/start/top_score_title.png" alt=""></span>
+            <p class="final_score">0</p>
+        </div> -->
+        <div class="popup_con">
+            <!-- 平时的分数 -->
+            <div class="txt">
+                <h2>本次得分</h2>
+                <p class="final_score">0</p>
+            </div>
+
+            <div class="btn_upup">
+                <a class="btn_restart close_btn" title="">在来一局</a>
+            </div>
+            <div class="player_list">
+                <div class="item">
+                    <span class="a_line">1</span>
+                    <span class="b_line"><img src="images/1.jpg" alt="头像"></span>
+                    <span class="c_line">小可爱</span>
+                    <span class="d_line">20</span>
+                </div>
+                <div class="item">
+                    <span class="a_line">1</span>
+                    <span class="b_line"><img src="images/1.jpg" alt="头像"></span>
+                    <span class="c_line">小可爱</span>
+                    <span class="d_line">20</span>
+                </div>
+                <div class="item">
+                    <span class="a_line">1</span>
+                    <span class="b_line"><img src="images/1.jpg" alt="头像"></span>
+                    <span class="c_line">小可爱</span>
+                    <span class="d_line">20</span>
+                </div>
+            </div>
+            <div class="btn_down">
+                <a href="index.html" class="btn_look_full" title="查看完整排行榜"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 您的游戏次数已使用完毕 点击我知道了,回到开始游戏-->
+    <div class="popup look_tc hit_appgo_tcjs">
+        
+        <div class="popup_con">
+            <a href="newstart.html" class="btn_lsee close_btn"><img src="images/lsee.png" alt="我知道了"></a>
+            <a class="btn_share callNewfriend"><img src="images/newbtn_share.png" alt="分享"></a>
+        </div>
+    </div>
+
+    <!-- 活动需在APP内进行 -->
+    <div class="popup look_tc hit_appli_tcjs">
+        <i class="icon_close close_btn rule_close"></i>
+        <div class="popup_con">
+            <a class="btn_gogo"><img src="images/start/btn_gogo.png" alt="立即参与"></a>
+            <a class="btn_download"><img src="images/start/btn_download.png" alt="立即下载"></a>
+        </div>
+    </div>
+
+    <!-- 非APP内的弹窗 -->
+    <div class="popup friend_share_tc">
+        <div class="share_tc"></div>
+    </div>
+
+</body>
+<script src="js/jquery-3.2.1.js"></script>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+<script src="js/layer/layer.js" ></script>
+<script>
+        // layer.open({  //您的游戏次数已使用完毕
+        //     type: 1,
+        //     shadeClose: false,
+        //     title: false,
+        //     closeBtn: 0,
+        //     skin: 'yourclass',
+        //     area: ['5.61rem', ''],
+        //     content: $('.hit_appgo_tcjs'),
+		// 	  success: function(){
+		// 	  	$("body").addClass('poh');
+		// 	  },
+		// 	  end: function(){
+		// 	  	$("body").removeClass('poh');
+		// 	  }
+        // });
+
+    $('.callNewfriend').on('click',function(){
+        layer.open({  //分享弹窗
+            type: 1,
+            shadeClose: false,
+            title: false,
+            closeBtn: 0,
+            skin: 'yourclass',
+            area: ['7.5rem', '100%'],
+            content: $('.friend_share_tc'),
+			  success: function(){
+			  	$("body").addClass('poh');
+			  },
+			  end: function(){
+			  	$("body").removeClass('poh');
+			  }
+        });
+    })
+
+    $('.btn_luck_link').on('click',function(){
+        layer.open({ // 点击幸运大转盘弹出
+            type: 1,
+            shadeClose: false,
+            title: false,
+            closeBtn: 0,
+            skin: 'yourclass',
+            area: ['5.61rem', ''],
+            content: $('.hit_appli_tcjs'),
+			  success: function(){
+			  	$("body").addClass('poh');
+			  },
+			  end: function(){
+			  	$("body").removeClass('poh');
+			  }
+        });
+    })
+
+
+    $('.btn_rule').on('click',function(){
+        layer.open({  //游戏规则
+            type: 1,
+            shadeClose: false,
+            title: false,
+            closeBtn: 0,
+            skin: 'yourclass',
+            area: ['5.61rem', ''],
+            content: $('.start_rule_tc'),
+            success: function(){
+                $("body").addClass('poh');
+            },
+            end: function(){
+                $("body").removeClass('poh');
+            }
+        });
+    })
+
+    $('.btn_rule_top').on('click',function(){
+        layer.open({  //请在APP内生成自己的游戏链接
+            type: 1,
+            shadeClose: false,
+            title: false,
+            closeBtn: 0,
+            skin: 'yourclass',
+            area: ['5.61rem', ''],
+            content: $('.start_rule_tc'),
+            success: function(){
+                $("body").addClass('poh');
+            },
+            end: function(){
+                $("body").removeClass('poh');
+            }
+        });
+    })
+    
+        
+
+    //关闭TC
+    $('.close_btn').on('click',function(){
+        layer.closeAll(); 
+    })
+    
+</script>
+<script src="./js/game.js"></script>
+</html>
